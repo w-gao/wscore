@@ -18,12 +18,12 @@ public class Main {
 
         Launcher.getLauncher()
                 .addServiceServer("/service")
-                .addNodeServer("/")
+                .addNodeServer("/n1")
                 .setPort(8080)
                 .start();
 
         // Input handler
-        new Thread((new CommandReader())).start();
+        new Thread(new CommandReader()).start();
     }
 
 }
