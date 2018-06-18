@@ -2,6 +2,10 @@
 
 package wscore.route;
 
+import wscore.controller.ServiceController;
+
+import static spark.Spark.*;
+
 /**
  * Route
  *
@@ -11,6 +15,6 @@ public class Route {
 
     public static void init() {
 
-
+        get("/services", ServiceController::getServices);
     }
 }

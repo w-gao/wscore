@@ -15,6 +15,7 @@ public class PongPacket extends Packet {
     }
 
     public int getLength() {
+
         return 1;
     }
 

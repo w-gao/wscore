@@ -9,6 +9,8 @@ import wscore.net.CommCode;
 import wscore.net.Packet;
 import wscore.net.PingPacket;
 import wscore.net.PongPacket;
+import wscore.net.service.ConnectRequestPacket;
+import wscore.net.service.ConnectResponsePacket;
 import wscore.util.Binary;
 
 import java.io.IOException;
@@ -42,11 +44,31 @@ public class ServiceSocketHandler {
                 pk.buffer = buffer;
                 pk.decode();
 
+                System.out.println("Ping received: " + ((PingPacket) pk).pingId);
+
                 // respond with pong
                 Packet pongPacket = new PongPacket();
                 pongPacket.encode();
 
                 this.sendPacket(session, pongPacket);
+                break;
+
+            case CommCode.SVC_CONNECT_REQUEST:
+                pk = new ConnectRequestPacket();
+                pk.buffer = buffer;
+                pk.decode();
+
+                byte status = ConnectResponsePacket.ConnectStatus.SUCCESS;
+
+                if (!((ConnectRequestPacket) pk).version.equals("v0.1a")) {
+                    status = ConnectResponsePacket.ConnectStatus.FAILED_OUTDATED;
+                }
+
+                ConnectResponsePacket resPacket = new ConnectResponsePacket();
+                resPacket.status = status;
+                resPacket.encode();
+
+                this.sendPacket(session, resPacket);
                 break;
         }
 

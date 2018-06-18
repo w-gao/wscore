@@ -1,0 +1,3 @@
+[submodule "src/main/resources/public"]
+	path = src/main/resources/public
+	url = git@github.com:w-gao/wscore-web.git
