@@ -14,5 +14,9 @@ public interface CommCode {
 
     byte SVC_CONNECT_REQUEST = 0x02;
     byte SVC_CONNECT_RESPONSE = 0x03;
+    byte SVC_TRANSFER_NODE = 0x04;
+
+    byte NODE_LOGIN = 0x10;
+
 
 }

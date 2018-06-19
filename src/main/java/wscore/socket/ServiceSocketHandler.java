@@ -3,6 +3,7 @@
 package wscore.socket;
 
 import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import wscore.net.CommCode;
@@ -11,6 +12,7 @@ import wscore.net.PingPacket;
 import wscore.net.PongPacket;
 import wscore.net.service.ConnectRequestPacket;
 import wscore.net.service.ConnectResponsePacket;
+import wscore.net.service.TransferNodePacket;
 import wscore.util.Binary;
 
 import java.io.IOException;
@@ -69,6 +71,15 @@ public class ServiceSocketHandler {
                 resPacket.encode();
 
                 this.sendPacket(session, resPacket);
+
+                if (status == ConnectResponsePacket.ConnectStatus.SUCCESS) {
+
+                    TransferNodePacket tnPacket = new TransferNodePacket();
+                    tnPacket.url = "ws://localhost:8080/n1";
+                    tnPacket.encode();
+
+                    this.sendPacket(session, tnPacket);
+                }
                 break;
         }
 
@@ -81,5 +92,11 @@ public class ServiceSocketHandler {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @OnWebSocketClose
+    public void onClose(Session session, int statusCode, String reason) {
+
+        System.out.println(session.getRemoteAddress().getHostName() + ":" + session.getRemoteAddress().getPort() + " -]-- Disconnected (" + reason + " [" + statusCode + "])");
     }
 }
