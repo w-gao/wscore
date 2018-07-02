@@ -17,9 +17,11 @@ public class Main {
     public static void main(String[] args) {
 
         Launcher.getLauncher()
-                .addServiceServer("/service")
-                .addNodeServer("/n1")
+                .setBaseUrl("localhost")
                 .setPort(8080)
+                .setSecure(false)       // development environment
+                .addServiceServer("/service", "Local", "default")
+                .addNodeServer("/n1")
                 .start();
 
         // Input handler
