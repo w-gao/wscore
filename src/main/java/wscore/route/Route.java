@@ -16,5 +16,10 @@ public class Route {
     public static void init() {
 
         get("/services", ServiceController::getServices);
+
+        notFound((req, res) -> {
+            res.redirect("/");
+            return "404 Not found.. Redirecting";
+        });
     }
 }

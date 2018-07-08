@@ -10,6 +10,7 @@ import wscore.engine.data.Service;
 import wscore.route.Route;
 import wscore.socket.NodeSocketHandler;
 import wscore.socket.ServiceSocketHandler;
+import wscore.util.SparkUtils;
 
 import static spark.Spark.*;
 
@@ -110,7 +111,7 @@ public class Launcher {
 
     public synchronized void start() {
 
-        staticFileLocation("public");
+        staticFileLocation("web/public");
 
         port(this.port);
 
@@ -118,6 +119,9 @@ public class Launcher {
 
         // initialize server if not already
         init();
+
+        Spark.awaitInitialization();
+        SparkUtils.fixNotFoundRoute();
 
         Launcher.started = true;
 

@@ -1,3 +1,5 @@
+/* Copyright (c) 2018.06 w-gao */
+
 package wscore.client;
 
 import org.eclipse.jetty.websocket.api.Session;
@@ -9,8 +11,7 @@ import java.nio.ByteBuffer;
 /**
  * Client
  *
- * @author w.gao Copyright (c) 2018.05
- * @version 1.0
+ * @author William Gao
  */
 public class Client {
 
