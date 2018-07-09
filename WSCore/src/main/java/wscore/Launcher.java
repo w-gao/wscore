@@ -111,7 +111,7 @@ public class Launcher {
 
     public synchronized void start() {
 
-        staticFileLocation("web/public");
+        staticFileLocation("public");
 
         port(this.port);
 
