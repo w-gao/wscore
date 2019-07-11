@@ -17,9 +17,9 @@ public class Route {
 
         get("/services", ServiceController::getServices);
 
-        notFound((req, res) -> {
-            res.redirect("/");
-            return "404 Not found.. Redirecting";
-        });
+//        notFound((req, res) -> {
+//            res.redirect("/");
+//            return "404 Not found.. Redirecting";
+//        });
     }
 }
